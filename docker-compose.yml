@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  lead-creation-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Copy from your .env file or set these values
+      - BASIC_APPLICATION_API_URL=${BASIC_APPLICATION_API_URL}
+      - BASIC_APPLICATION_USER_ID=${BASIC_APPLICATION_USER_ID}
+      - BASIC_APPLICATION_API_KEY=${BASIC_APPLICATION_API_KEY}
+      - AWS_REGION=${AWS_REGION:-ap-south-1}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - GUPSHUP_API_KEY=${GUPSHUP_API_KEY}
+      - GUPSHUP_SOURCE=${GUPSHUP_SOURCE}
+      - GUPSHUP_CHANNEL=${GUPSHUP_CHANNEL}
+      - GUPSHUP_TEMPLATE_LEAD_CREATION=${GUPSHUP_TEMPLATE_LEAD_CREATION}
+      - GUPSHUP_TEMPLATE_LEAD_STATUS=${GUPSHUP_TEMPLATE_LEAD_STATUS}
+      - GUPSHUP_SOURCE_LEAD_CREATION=${GUPSHUP_SOURCE_LEAD_CREATION}
+      - GUPSHUP_SOURCE_LEAD_STATUS=${GUPSHUP_SOURCE_LEAD_STATUS}
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      # Mount logs directory if needed
+      - ./logs:/app/logs
+    networks:
+      - lead-network
+
+networks:
+  lead-network:
+    driver: bridge 

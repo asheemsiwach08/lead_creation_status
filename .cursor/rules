@@ -1,0 +1,235 @@
+# Lead Creation Verification API - Cursor IDE Rules
+
+## Project Overview
+This is a FastAPI-based lead creation and status verification API that integrates with:
+- Basic Application API for lead processing
+- Supabase database for data storage
+- Gupshup WhatsApp API for notifications
+
+## Code Style & Standards
+
+### Python
+- Use Python 3.11+ features
+- Follow PEP 8 style guidelines
+- Use type hints for all function parameters and return values
+- Use f-strings for string formatting
+- Use async/await for I/O operations
+- Use dataclasses or Pydantic models for data structures
+
+### FastAPI
+- Use Pydantic models for request/response validation
+- Use proper HTTP status codes
+- Implement comprehensive error handling
+- Use dependency injection where appropriate
+- Document all endpoints with proper descriptions
+
+### Error Handling
+- Always use HTTPException for API errors
+- Provide meaningful error messages
+- Log errors appropriately
+- Handle external API failures gracefully
+- Return structured error responses
+
+## Architecture Guidelines
+
+### Service Layer
+- Keep business logic in service classes
+- Use dependency injection for external services
+- Implement proper error handling and logging
+- Keep services focused on single responsibilities
+
+### Database
+- Use Supabase client for database operations
+- Implement proper connection handling
+- Use transactions where appropriate
+- Handle database errors gracefully
+
+### External APIs
+- Implement retry logic for transient failures
+- Use proper timeout configurations
+- Handle rate limiting appropriately
+- Log all external API calls and responses
+
+## Security Guidelines
+
+### Environment Variables
+- Never commit sensitive data to version control
+- Use environment variables for all configuration
+- Validate environment variables on startup
+- Use secure defaults where appropriate
+
+### API Security
+- Validate all input data
+- Use proper authentication for external APIs
+- Implement rate limiting if needed
+- Log security-related events
+
+## Testing Guidelines
+
+### Unit Tests
+- Write tests for all business logic
+- Mock external dependencies
+- Test error scenarios
+- Maintain good test coverage
+
+### Integration Tests
+- Test API endpoints end-to-end
+- Test external API integrations
+- Test database operations
+- Use test databases for integration tests
+
+## Documentation
+
+### Code Documentation
+- Use docstrings for all public functions
+- Document complex business logic
+- Keep documentation up-to-date
+- Use type hints for better documentation
+
+### API Documentation
+- Use FastAPI's automatic documentation
+- Provide clear endpoint descriptions
+- Document all request/response models
+- Include example requests and responses
+
+## Deployment Guidelines
+
+### Docker
+- Use multi-stage builds for optimization
+- Keep images small and secure
+- Use non-root users in containers
+- Implement health checks
+
+### Environment Management
+- Use environment-specific configurations
+- Validate all required environment variables
+- Use secrets management for sensitive data
+- Implement proper logging configuration
+
+## Git Workflow
+
+### Commits
+- Use conventional commit messages
+- Keep commits focused and atomic
+- Include relevant issue numbers
+- Write clear commit descriptions
+
+### Branches
+- Use feature branches for new development
+- Keep main branch stable
+- Use pull requests for code review
+- Delete merged feature branches
+
+## Performance Guidelines
+
+### API Performance
+- Use async operations where possible
+- Implement proper caching strategies
+- Optimize database queries
+- Monitor API response times
+
+### Resource Management
+- Use connection pooling for databases
+- Implement proper timeout handling
+- Monitor memory usage
+- Use efficient data structures
+
+## Monitoring & Logging
+
+### Logging
+- Use structured logging
+- Log at appropriate levels
+- Include relevant context in logs
+- Implement log rotation
+
+### Monitoring
+- Monitor API health and performance
+- Track external API usage
+- Monitor database performance
+- Set up alerts for critical issues
+
+## Code Review Checklist
+
+### Before Submitting
+- [ ] Code follows style guidelines
+- [ ] All tests pass
+- [ ] Documentation is updated
+- [ ] Error handling is implemented
+- [ ] Security considerations addressed
+- [ ] Performance impact considered
+
+### During Review
+- [ ] Code is readable and maintainable
+- [ ] Business logic is correct
+- [ ] Error scenarios are handled
+- [ ] Security is not compromised
+- [ ] Performance is acceptable
+- [ ] Documentation is clear
+
+## Common Patterns
+
+### API Response Pattern
+```python
+try:
+    result = service.method()
+    return ResponseModel(data=result)
+except ValidationError as e:
+    raise HTTPException(status_code=422, detail=str(e))
+except ExternalAPIError as e:
+    raise HTTPException(status_code=500, detail="External service error")
+except Exception as e:
+    logger.error(f"Unexpected error: {e}")
+    raise HTTPException(status_code=500, detail="Internal server error")
+```
+
+### Service Method Pattern
+```python
+async def method_name(self, param: ParamType) -> ResultType:
+    """
+    Brief description of what this method does.
+    
+    Args:
+        param: Description of parameter
+        
+    Returns:
+        Description of return value
+        
+    Raises:
+        HTTPException: When something goes wrong
+    """
+    try:
+        # Implementation
+        return result
+    except SpecificError as e:
+        logger.error(f"Specific error occurred: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+```
+
+## External Dependencies
+
+### Required Services
+- Basic Application API: For lead creation and status
+- Supabase: For data storage
+- Gupshup WhatsApp API: For notifications
+- AWS Lambda (optional): For signature generation
+
+### Configuration
+- All external service credentials in environment variables
+- Proper error handling for service unavailability
+- Retry logic for transient failures
+- Monitoring for service health
+
+## Maintenance
+
+### Regular Tasks
+- Update dependencies regularly
+- Review and update documentation
+- Monitor API performance
+- Review error logs
+- Update security configurations
+
+### Code Quality
+- Run linting tools regularly
+- Maintain test coverage
+- Review and refactor code
+- Update coding standards as needed 

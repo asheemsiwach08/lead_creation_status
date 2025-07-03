@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic[email]
+python-multipart
+httpx
+python-dotenv
+requests
+email-validator
+supabase 
