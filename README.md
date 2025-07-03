@@ -383,11 +383,6 @@ BASIC_APPLICATION_API_URL=https://dev-applicationservice.basichomeloan.com
 BASIC_APPLICATION_USER_ID=your_user_id_here
 BASIC_APPLICATION_API_KEY=your_api_key_here
 
-# AWS Configuration
-AWS_REGION=ap-south-1
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
-
 # Gupshup WhatsApp API Configuration
 GUPSHUP_API_URL=https://api.gupshup.io/wa/api/v1/msg
 GUPSHUP_API_KEY=your_gupshup_api_key
@@ -412,9 +407,6 @@ DEBUG=True
 - **BASIC_APPLICATION_API_URL**: Base URL for the Basic Application API
 - **BASIC_APPLICATION_USER_ID**: User ID for Basic Application API authentication
 - **BASIC_APPLICATION_API_KEY**: API key for Basic Application API authentication
-- **AWS_REGION**: AWS region for Lambda function (default: ap-south-1)
-- **AWS_ACCESS_KEY_ID**: AWS access key for Lambda invocation
-- **AWS_SECRET_ACCESS_KEY**: AWS secret key for Lambda invocation
 - **GUPSHUP_API_URL**: Gupshup WhatsApp API endpoint
 - **GUPSHUP_API_KEY**: API key for Gupshup authentication
 - **GUPSHUP_SOURCE**: Source phone number for WhatsApp messages
@@ -425,7 +417,7 @@ DEBUG=True
 - **SUPABASE_URL**: Supabase project URL
 - **SUPABASE_KEY**: Supabase anonymous key for database access
 
-**Note**: Authentication signatures are generated dynamically using the AWS Lambda function `AuthSignatureLambda` for secure and centralized signature management.
+**Note**: Authentication signatures are generated using HMAC-SHA512 algorithm with the provided User ID and API Key for secure API communication.
 
 ## Testing
 

@@ -211,7 +211,6 @@ async def method_name(self, param: ParamType) -> ResultType:
 - Basic Application API: For lead creation and status
 - Supabase: For data storage
 - Gupshup WhatsApp API: For notifications
-- AWS Lambda (optional): For signature generation
 
 ### Configuration
 - All external service credentials in environment variables
